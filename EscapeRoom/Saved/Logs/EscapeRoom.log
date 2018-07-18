@@ -1,4 +1,4 @@
-﻿Log file open, 07/18/18 23:03:13
+﻿Log file open, 07/18/18 23:11:27
 LogWindows: Failed to load 'aqProf.dll' (GetLastError=126)
 LogWindows: File 'aqProf.dll' does not exist
 LogWindows: Failed to load 'VtuneApi.dll' (GetLastError=126)
@@ -7,12 +7,12 @@ LogWindows: Failed to load 'VtuneApi32e.dll' (GetLastError=126)
 LogWindows: File 'VtuneApi32e.dll' does not exist
 LogInit: Display: Running engine for game: EscapeRoom
 LogPlatformFile: Not using cached read wrapper
-LogInit: Display: RandInit(83090744) SRandInit(83090744).
+LogInit: Display: RandInit(1771838146) SRandInit(1771838146).
 LogInit: Read version file with build ID '3944462'
 LogInit: Overriding engine version to CL 4033788, compatible CL 3944462
 LogInit: Registered custom module enumerator with build ID '3944462'
 LogTaskGraph: Started task graph with 5 named threads and 14 total threads with 3 sets of task threads.
-LogStats: Stats thread started at 0.159409
+LogStats: Stats thread started at 0.171442
 LogD3D11RHI: Aftermath initialized
 LogICUInternationalization: Display: ICU TimeZone Detection - Raw Offset: +2:00, Platform Override: ''
 LogPluginManager: Mounting plugin Paper2D
@@ -84,7 +84,7 @@ LogPluginManager: Mounting plugin ProceduralMeshComponent
 LogPluginManager: Mounting plugin RuntimePhysXCooking
 LogPluginManager: Mounting plugin SteamVR
 LogPluginManager: Mounting plugin WindowsMoviePlayer
-LogStreaming: Display: Took  0.093s to configure plugins.
+LogStreaming: Display: Took  0.091s to configure plugins.
 LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/2D/Paper2D/Binaries/Win64/UE4Editor-Paper2D.dll (API version 3944462).
 LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/2D/Paper2D/Binaries/Win64/UE4Editor-Paper2DEditor.dll (API version 3944462).
 LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/2D/Paper2D/Binaries/Win64/UE4Editor-PaperSpriteSheetImporter.dll (API version 3944462).
@@ -172,14 +172,9 @@ LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/
 LogInit: Warning: Incompatible or missing module: UE4Editor-EscapeRoom.dll
 Running D:/Program Files/Epic Games/UE_4.19/Engine/Binaries/DotNET/UnrealBuildTool.exe EscapeRoom Development Win64 -project="D:/Repos/UdemyUnreal/EscapeRoom/EscapeRoom.uproject" -editorrecompile -progress -NoHotReloadFromIDE
 Using 'git status' to determine working set for adaptive non-unity build.
-Creating makefile for EscapeRoom (no existing makefile)
-Performing full C++ include scan (no include cache file)
 @progress push 5%
-Parsing headers for EscapeRoomEditor
-  Running UnrealHeaderTool "D:\Repos\UdemyUnreal\EscapeRoom\EscapeRoom.uproject" "D:\Repos\UdemyUnreal\EscapeRoom\Intermediate\Build\Win64\EscapeRoomEditor\Development\EscapeRoomEditor.uhtmanifest" -LogCmds="loginit warning, logexit warning, logdatabase error" -Unattended -WarningsAsErrors -installed
-Reflection code generated for EscapeRoomEditor in 9.2473399 seconds
 @progress pop
-Distributing 12 actions to XGE
+Distributing 3 actions to XGE
 --------------------Build System Warning---------------------------------------
 License is invalid:
     License information is invalid. Please try reloading your license file using the Coordinator Monitor application on the Coordinator machine, or reinstall IncrediBuild.
@@ -187,9 +182,7 @@ License is invalid:
 
 -------------------------------------------------------------------------------
 --------------------Project: Default-------------------------------------------
- (0:01.57 at +0:00)
-EscapeRoom.cpp
- (0:03.37 at +0:01)
+ (0:03.48 at +0:00)
 Grabber.cpp
 D:\Repos\UdemyUnreal\EscapeRoom\Source\EscapeRoom\Grabber.cpp(121): error C2027: use of undefined type 'UPrimitiveComponent'
 D:\Program Files\Epic Games\UE_4.19\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\PhysicsHandleComponent.generated.h(13): note: see declaration of 'UPrimitiveComponent'
@@ -198,20 +191,6 @@ D:\Repos\UdemyUnreal\EscapeRoom\Source\EscapeRoom\Grabber.cpp(121): error C2227:
 D:\Repos\UdemyUnreal\EscapeRoom\Source\EscapeRoom\Grabber.cpp(123): error C2660: 'UPhysicsHandleComponent::GrabComponent': function does not take 3 arguments
 
 Error executing D:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\amd64\cl.exe (tool returned code: 2)
- (0:04.68 at +0:05)
-OpenDoor.cpp
- (0:02.31 at +0:09)
-PositionReport.cpp
- (0:01.64 at +0:12)
-EscapeRoom.init.gen.cpp
- (0:04.17 at +0:13)
-Grabber.gen.cpp
- (0:02.34 at +0:17)
-OpenDoor.gen.cpp
- (0:02.32 at +0:20)
-PositionReport.gen.cpp
-ModuleVersionResource.rc.inl (0:00.23 at +0:22)
-PCLaunch.rc (0:00.17 at +0:22)
 ---------------------- Done ----------------------
  
     Rebuild All: 0 succeeded, 1 failed, 0 skipped
@@ -222,7 +201,7 @@ PCLaunch.rc (0:00.17 at +0:22)
 
 
 ERROR: UBT ERROR: Failed to produce item: D:\Repos\UdemyUnreal\EscapeRoom\Binaries\Win64\UE4Editor-EscapeRoom.dll
-Total build time: 58.48 seconds (XGE executor: 0.00 seconds)
+Total build time: 5.20 seconds (XGE executor: 0.00 seconds)
 LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/2D/Paper2D/Binaries/Win64/UE4Editor-Paper2D.dll (API version 3944462).
 LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/2D/Paper2D/Binaries/Win64/UE4Editor-Paper2DEditor.dll (API version 3944462).
 LogModuleManager: Display: Found up-to-date module file ../../../Engine/Plugins/2D/Paper2D/Binaries/Win64/UE4Editor-PaperSpriteSheetImporter.dll (API version 3944462).
@@ -329,4 +308,4 @@ LogModuleManager: Shutting down and abandoning module StreamingFile (6)
 LogModuleManager: Shutting down and abandoning module SandboxFile (4)
 LogModuleManager: Shutting down and abandoning module PakFile (2)
 LogExit: Exiting.
-Log file closed, 07/18/18 23:04:21
+Log file closed, 07/18/18 23:11:40
