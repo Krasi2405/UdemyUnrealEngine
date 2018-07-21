@@ -51,5 +51,11 @@ private:
 		FVector PlayerViewPointLocation;
 		FRotator PlayerViewPointRotation;
 	} FPlayerOrientation;
+
+	FVector GetReachLineEnd();
+
+
+	float GrabbedCapturedYaw = 0.0f; // Yaw of the Grabbed item is captured here the moment it's grabbed.
+	float PlayerCapturedYaw = 0.0f; // Yaw of the Player is captured here the moment you grab something.
 	
 };

@@ -5,6 +5,19 @@
 #include "Runtime/Engine/Classes/Engine/World.h"
 #include "DrawDebugHelpers.h"
 #define OUT
+
+FVector UGrabber::GetReachLineEnd()
+{
+	FVector PlayerViewPointLocation;
+	FRotator PlayerViewPointRotation;
+	GetWorld()->GetFirstPlayerController()->GetPlayerViewPoint(
+		OUT PlayerViewPointLocation,
+		OUT PlayerViewPointRotation);
+
+	FVector LineTraceEnd = PlayerViewPointLocation + PlayerViewPointRotation.Vector() * Reach;
+	return LineTraceEnd;
+}
+
 // Sets default values for this component's properties
 UGrabber::UGrabber()
 {
@@ -20,9 +33,7 @@ UGrabber::UGrabber()
 void UGrabber::BeginPlay()
 {
 	Super::BeginPlay();
-
 	FindPhysicsHandleComponent();
-
 	SetupInputComponent();
 
 }
@@ -30,18 +41,14 @@ void UGrabber::BeginPlay()
 void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-	FVector PlayerViewPointLocation;
-	FRotator PlayerViewPointRotation;
-	GetWorld()->GetFirstPlayerController()->GetPlayerViewPoint(
-		OUT PlayerViewPointLocation,
-		OUT PlayerViewPointRotation);
-
-
-	//UE_LOG(LogTemp, Warning, TEXT("Reporting position: %s and rotation %s, rotationVector: %s"), *PlayerViewPointLocation.ToString(), *PlayerViewPointRotation.ToString(), *PlayerViewPointRotation.Vector().ToString());
-	FVector LineTraceEnd = PlayerViewPointLocation + PlayerViewPointRotation.Vector() * Reach;
 
 	if (PhysicsHandle->GrabbedComponent) {
-		PhysicsHandle->SetTargetLocation(LineTraceEnd);
+		float PlayerYaw = FPlayerOrientation.PlayerViewPointRotation.Yaw; // The player's Yaw is updated here.
+		float NewYaw = (PlayerYaw - PlayerCapturedYaw) + GrabbedCapturedYaw; // Your changes in rotation are added to the grabbed object.
+
+		PhysicsHandle->SetTargetLocation(GetReachLineEnd());
+		PhysicsHandle->SetTargetRotation(FRotator(0.0f, NewYaw, 0.0f));
+
 	}
 	// ...
 }
@@ -71,49 +78,30 @@ void UGrabber::FindPhysicsHandleComponent()
 
 FHitResult UGrabber::GetFirstHitTarget()
 {
-	
-	GetWorld()->GetFirstPlayerController()->GetPlayerViewPoint(
-		OUT FPlayerOrientation.PlayerViewPointLocation,
-		OUT FPlayerOrientation.PlayerViewPointRotation);
-
-
-	//UE_LOG(LogTemp, Warning, TEXT("Reporting position: %s and rotation %s, rotationVector: %s"), *PlayerViewPointLocation.ToString(), *PlayerViewPointRotation.ToString(), *PlayerViewPointRotation.Vector().ToString());
-	FVector LineTraceEnd = FPlayerOrientation.PlayerViewPointLocation + FPlayerOrientation.PlayerViewPointRotation.Vector() * Reach;
-
-	/*DrawDebugLine(
-		GetWorld(),
-		PlayerViewPointLocation,
-		LineTraceEnd,
-		FColor(120, 120, 120),
-		false,
-		0.f,
-		0,
-		10.f
-	);*/
 
 	FHitResult Hit;
 	FCollisionQueryParams TraceParameters(FName(TEXT("")), false, GetOwner());
 	GetWorld()->LineTraceSingleByObjectType(
 		OUT Hit,
 		FPlayerOrientation.PlayerViewPointLocation,
-		LineTraceEnd,
+		GetReachLineEnd(),
 		FCollisionObjectQueryParams(ECC_PhysicsBody),
 		TraceParameters
 	);
 
-	AActor* ActorHit = Hit.GetActor();
-	if (ActorHit) {
-		//UE_LOG(LogTemp, Warning, TEXT("Actor hit %s "), *ActorHit->GetName());
-	}
 	return Hit;
 }
 
 void UGrabber::Grab() {
 	UE_LOG(LogTemp, Warning, TEXT("Grab"));
+
 	FHitResult HitResult =  GetFirstHitTarget();
 	AActor* ActorHit = HitResult.GetActor();
 	UPrimitiveComponent* Component = HitResult.GetComponent();
+
 	if (ActorHit && Component) {
+		GrabbedCapturedYaw = ActorHit->GetActorRotation().Yaw;
+		PlayerCapturedYaw = FPlayerOrientation.PlayerViewPointRotation.Yaw;
 		PhysicsHandle->GrabComponentAtLocation(
 			Component,
 			NAME_None,
