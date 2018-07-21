@@ -33,12 +33,7 @@ private:
 	float OpenAngle = 90.0f;
 
 	UPROPERTY(EditAnywhere)
-	ATriggerVolume* PressurePlate;
-	
-	UPROPERTY(EditAnywhere)	
-	float CloseDelay = 3.0f;
-
-	float LastOpenTime = 0.f;
+	ATriggerVolume* PressurePlate = nullptr;
 	
 	UPROPERTY(EditAnywhere)
 	float OpenMass = 80.0f;

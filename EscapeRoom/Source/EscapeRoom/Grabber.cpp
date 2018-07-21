@@ -41,6 +41,7 @@ void UGrabber::BeginPlay()
 void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+	if (!PhysicsHandle) return;
 
 	if (PhysicsHandle->GrabbedComponent) {
 		float PlayerYaw = FPlayerOrientation.PlayerViewPointRotation.Yaw; // The player's Yaw is updated here.
@@ -93,25 +94,29 @@ FHitResult UGrabber::GetFirstHitTarget()
 }
 
 void UGrabber::Grab() {
-	UE_LOG(LogTemp, Warning, TEXT("Grab"));
+
 
 	FHitResult HitResult =  GetFirstHitTarget();
 	AActor* ActorHit = HitResult.GetActor();
 	UPrimitiveComponent* Component = HitResult.GetComponent();
 
-	if (ActorHit && Component) {
+	if (ActorHit && Component && PhysicsHandle) {
 		GrabbedCapturedYaw = ActorHit->GetActorRotation().Yaw;
 		PlayerCapturedYaw = FPlayerOrientation.PlayerViewPointRotation.Yaw;
+
 		PhysicsHandle->GrabComponentAtLocation(
 			Component,
 			NAME_None,
 			Component->GetOwner()->GetActorLocation()
 		);
+		UE_LOG(LogTemp, Warning, TEXT("Grab"));
 	}
+	
 }
 
 void UGrabber::Release()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Release"));
+	if (!PhysicsHandle) return;
 	PhysicsHandle->ReleaseComponent();
+	UE_LOG(LogTemp, Warning, TEXT("Release"));
 }
