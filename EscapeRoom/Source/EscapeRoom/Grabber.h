@@ -8,7 +8,8 @@
 #include "Engine/World.h"
 #include "PhysicsEngine/PhysicsHandleComponent.h"
 #include "Components/InputComponent.h"
-#include "PhysicsEngine/PhysicsHandleComponent.h"
+#include "Components/PrimitiveComponent.h"
+
 #include "Grabber.generated.h"
 
 
@@ -45,5 +46,10 @@ private:
 	void Grab();
 
 	void Release();
+
+	struct FPlayerOrientation {
+		FVector PlayerViewPointLocation;
+		FRotator PlayerViewPointRotation;
+	} FPlayerOrientation;
 	
 };
