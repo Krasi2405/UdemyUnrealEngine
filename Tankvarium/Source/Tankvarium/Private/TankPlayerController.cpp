@@ -8,10 +8,10 @@ void ATankPlayerController::BeginPlay()
 	Super::BeginPlay();
 	ATank* PossessedTank = GetControlledTank();
 	if (PossessedTank) {
-		UE_LOG(LogTemp, Error, TEXT("tank possessed %s"), *PossessedTank->GetName())
+		UE_LOG(LogTemp,Warning, TEXT("tank possessed %s"), *PossessedTank->GetName())
 	}
 	else {
-		UE_LOG(LogTemp, Warning, TEXT("TankPlayerController does not possess a tank"))
+		UE_LOG(LogTemp, Error, TEXT("TankPlayerController does not possess a tank"))
 	}
 }
 
