@@ -4,8 +4,12 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
-#include "TankAimingComponent.h"
 #include "Tank.generated.h"
+
+//forward declarations
+class UTankBarrel;
+class UTankAimingComponent;
+class UTankTurret;
 
 UCLASS()
 class TANKVARIUM_API ATank : public APawn
@@ -21,18 +25,14 @@ public:
 	void AimAt(FVector AimLocation);
 
 	UFUNCTION(BlueprintCallable, Category=Setup)
-	void SetBarrelPointer(UStaticMeshComponent* BarrelToSet);
+	void SetBarrelPointer(UTankBarrel* BarrelToSet);
+
+	UFUNCTION(BlueprintCallable, Category = Setup)
+	void SetTurretPointer(UTankTurret* TurretToSet);
 
 	UPROPERTY(EditAnywhere, Category = Firing)
 	float LaunchSpeed = 100000; // 1000 m/s default 
 
-								// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-
-	virtual void Tick(float DeltaTime) override;
-
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	UTankAimingComponent* TankAimingComponent = nullptr;
 };
